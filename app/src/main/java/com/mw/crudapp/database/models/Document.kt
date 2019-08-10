@@ -7,10 +7,6 @@ data class Document(
 
     val header: DocumentHeader,
 
-    val netValue: Double,
-
-    val grossValue: Double,
-
     val positions: List<DocumentPosition>
 
 )

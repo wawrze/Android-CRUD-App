@@ -14,7 +14,13 @@ data class DocumentHeader(
 
     var customerId: Long = 0L,
 
-    var customerName: String = ""
+    var customerName: String = "",
+
+    @Ignore
+    var netValue: Double = 0.0,
+
+    @Ignore
+    var grossValue: Double = 0.0
 
 ) {
     @Ignore

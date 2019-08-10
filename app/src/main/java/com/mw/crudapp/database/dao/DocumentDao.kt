@@ -34,8 +34,19 @@ abstract class DocumentDao {
         return positionsIds.isNotEmpty()
     }
 
-    @Query("SELECT * FROM DocumentHeader WHERE documentHeaderId = :documentId LIMIT 1")
-    abstract fun getByIdDocumentHeader(documentId: Long): DocumentHeader
+    @Query(
+        """
+        SELECT
+            dh.*,
+            SUM(dp.amount * dp.netPrice) AS netValue,
+            SUM(dp.amount * dp.grossPrice) AS grossValue
+        FROM DocumentHeader dh
+            JOIN DocumentPosition dp ON dp.documentHeaderId = dh.documentHeaderId
+        WHERE dh.documentHeaderId = :documentId
+        GROUP BY dh.documentHeaderId
+    """
+    )
+    abstract fun getDocumentHeaderById(documentId: Long): DocumentHeader
 
     @Query("SELECT * FROM DocumentPosition WHERE documentHeaderId = :documentId")
     abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPosition>
@@ -44,13 +55,7 @@ abstract class DocumentDao {
     abstract fun getAllDocumentHeaders(): List<DocumentHeader>
 
     fun getDocumentWithPositions(documentId: Long): Document {
-        val positions = getDocumentPositionsByHeaderId(documentId)
-        return Document(
-            getByIdDocumentHeader(documentId),
-            positions.map { it.amount * it.netPrice }.sum(),
-            positions.map { it.amount * it.grossPrice }.sum(),
-            positions
-        )
+        return Document(getDocumentHeaderById(documentId), getDocumentPositionsByHeaderId(documentId))
     }
 
 }
