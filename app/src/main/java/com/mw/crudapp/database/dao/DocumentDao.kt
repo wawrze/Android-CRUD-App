@@ -39,7 +39,8 @@ abstract class DocumentDao {
         SELECT
             dh.*,
             SUM(dp.amount * dp.netPrice) AS netValue,
-            SUM(dp.amount * dp.grossPrice) AS grossValue
+            SUM(dp.amount * dp.grossPrice) AS grossValue,
+            COUNT(dp.productName) AS positionsCount
         FROM DocumentHeader dh
             JOIN DocumentPosition dp ON dp.documentHeaderId = dh.documentHeaderId
         WHERE dh.documentHeaderId = :documentId

@@ -20,7 +20,10 @@ data class DocumentHeader(
     var netValue: Double = 0.0,
 
     @Ignore
-    var grossValue: Double = 0.0
+    var grossValue: Double = 0.0,
+
+    @Ignore
+    var positionsCount: Int = 0
 
 ) {
     @Ignore

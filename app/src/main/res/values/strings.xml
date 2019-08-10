@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">CRUD App</string>
     <string name="document_list">Lista dokumentów</string>
+    <string name="document_id">Numer dokumentu:</string>
+    <string name="document_date">Data dokumentu:</string>
+    <string name="customer">Klient:</string>
+    <string name="positions_count">Liczba pozycji:</string>
+    <string name="net_gross_value">Wartość netto / brutto:</string>
+    <string name="net_gross_price">Cena netto / brutto:</string>
+    <string name="edit_document">Edytuj dokument</string>
+    <string name="remove_document">Usuń dokument</string>
+    <string name="add_document">Dodaj nowy dokument</string>
 </resources>
