@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CRUD App</string>
+    <string name="document_list">Lista dokumentów</string>
 </resources>

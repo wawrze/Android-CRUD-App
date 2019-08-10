@@ -1,8 +1,4 @@
-package com.example.crudapp
-
-import org.junit.Test
-
-import org.junit.Assert.*
+package com.mw.crudapp
 
 /**
  * Example local unit test, which will execute on the development machine (host).
