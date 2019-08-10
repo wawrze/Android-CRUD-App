@@ -2,18 +2,34 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/regular_margin">
 
-    <TextView
-            android:layout_width="0dp"
+    <ImageView
+            android:id="@+id/item_add_icon"
+            android:src="@drawable/ic_add"
+            android:contentDescription="@string/edit_document"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD NEW DOCUMENT"
-            android:textAlignment="center"
-            android:padding="5dp"
-            android:background="@android:color/darker_gray"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/large_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/item_add_text"
+            style="@style/list_item_label_text"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_add_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/add_document" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
