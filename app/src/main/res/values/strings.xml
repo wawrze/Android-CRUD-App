@@ -10,4 +10,6 @@
     <string name="edit_document">Edytuj dokument</string>
     <string name="remove_document">Usuń dokument</string>
     <string name="add_document">Dodaj nowy dokument</string>
+    <string name="net_gross_with_currency">%s zł / %s zł</string>
+    <string name="customer_id_and_name">(%s) %s</string>
 </resources>
