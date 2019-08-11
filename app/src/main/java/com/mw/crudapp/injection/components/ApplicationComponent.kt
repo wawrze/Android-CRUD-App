@@ -11,10 +11,10 @@ import com.mw.crudapp.presentation.editdocument.EditDocumentViewModel
 import dagger.Component
 
 @Component(
-    modules = [
-        DatabaseModule::class,
-        NavigationModule::class
-    ]
+        modules = [
+            DatabaseModule::class,
+            NavigationModule::class
+        ]
 )
 interface ApplicationComponent {
 

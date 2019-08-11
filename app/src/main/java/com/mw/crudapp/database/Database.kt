@@ -7,12 +7,12 @@ import com.mw.crudapp.database.entities.DocumentHeader
 import com.mw.crudapp.database.entities.DocumentPosition
 
 @Database(
-    entities = [
-        DocumentHeader::class,
-        DocumentPosition::class
-    ],
-    version = 1,
-    exportSchema = false
+        entities = [
+            DocumentHeader::class,
+            DocumentPosition::class
+        ],
+        version = 1,
+        exportSchema = false
 )
 abstract class Database : RoomDatabase() {
 

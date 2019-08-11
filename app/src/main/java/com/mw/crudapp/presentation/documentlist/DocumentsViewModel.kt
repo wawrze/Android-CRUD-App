@@ -19,10 +19,10 @@ class DocumentsViewModel : BaseViewModel() {
     fun fetchDocuments(): MutableLiveData<List<DocumentHeaderDto>> {
         Observable.fromCallable { documentDao.getAllDocumentHeaders() }
                 .onErrorReturn { ArrayList() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { documents.postValue(it) }
-            .addToDisposables()
+                .addToDisposables()
         return documents
     }
 

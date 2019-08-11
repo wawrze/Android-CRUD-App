@@ -25,7 +25,16 @@ abstract class DocumentDao {
     @Query("")
     @Transaction
     fun insertDocumentWithPositions(document: Document): Boolean {
-        val documentHeader = DocumentHeader(document.header.customerId, document.header.customerName)
+        val documentHeader = if (document.header.documentHeaderId > 0) {
+            DocumentHeader(
+                    document.header.documentHeaderId,
+                    document.header.creationDate,
+                    document.header.customerId,
+                    document.header.customerName
+            )
+        } else {
+            DocumentHeader(document.header.customerId, document.header.customerName)
+        }
         val documentHeaderId = insertHeaders(documentHeader)
         if (documentHeaderId <= 0L) {
             return false
@@ -46,7 +55,7 @@ abstract class DocumentDao {
     }
 
     @Query(
-        """
+            """
         SELECT
             dh.*,
             SUM(dp.amount * dp.netPrice) AS netValue,

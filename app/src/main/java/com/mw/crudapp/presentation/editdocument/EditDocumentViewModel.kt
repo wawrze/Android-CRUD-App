@@ -18,22 +18,22 @@ class EditDocumentViewModel : BaseViewModel() {
 
     fun fetchDocumentData(documentId: Long): MutableLiveData<Document?> {
         Observable.fromCallable { documentDao.getDocumentWithPositions(documentId) }
-            .onErrorReturn { null }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { documentData.postValue(it) }
-            .addToDisposables()
+                .onErrorReturn { null }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { documentData.postValue(it) }
+                .addToDisposables()
         return documentData
     }
 
     fun saveDocument(document: Document): MutableLiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
         Observable.fromCallable { documentDao.insertDocumentWithPositions(document) }
-            .onErrorReturn { false }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { result.postValue(it) }
-            .addToDisposables()
+                .onErrorReturn { false }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { result.postValue(it) }
+                .addToDisposables()
         return result
     }
 

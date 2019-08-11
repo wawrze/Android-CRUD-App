@@ -20,7 +20,7 @@ class DatabaseModule(private val context: Context) {
     fun provideDataBase(): Database {
         if (!::dataBase.isInitialized) {
             dataBase = Room.databaseBuilder(context, Database::class.java, DB_NAME)
-                .build()
+                    .build()
         }
         return dataBase
     }

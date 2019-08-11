@@ -46,10 +46,10 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
 
     private fun observersSetup() {
         viewModel.fetchDocuments().observe(
-            viewLifecycleOwner,
-            Observer {
-                adapter?.updateData(it)
-            }
+                viewLifecycleOwner,
+                Observer {
+                    adapter?.updateData(it)
+                }
         )
     }
 

@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseFragment
 import com.mw.crudapp.database.models.Document
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_add_document.*
 class EditDocumentFragment : BaseFragment() {
 
     private lateinit var viewModel: EditDocumentViewModel
+    private var adapter: EditDocumentPositionsAdapter? = null
     private val args by navArgs<EditDocumentFragmentArgs>()
     private lateinit var documentHeader: DocumentHeaderDto
 
@@ -30,6 +33,7 @@ class EditDocumentFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerSetup()
         setupView()
     }
 
@@ -39,30 +43,38 @@ class EditDocumentFragment : BaseFragment() {
         navigationBack = true
     }
 
+    private fun recyclerSetup() {
+        if (adapter == null) {
+            adapter = EditDocumentPositionsAdapter()
+        }
+        fragment_add_document_recycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        fragment_add_document_recycler.adapter = adapter
+    }
+
     private fun setupView() {
         viewModel.fetchDocumentData(args.documentId).observe(
-            viewLifecycleOwner,
-            Observer {
-                it?.let { document ->
-                    documentHeader = document.header
-                    fragment_add_document_customer_id_input.setText(document.header.customerId.toString())
-                    fragment_add_document_customer_name_input.setText(document.header.customerName)
-                    // TODO set adapter data
+                viewLifecycleOwner,
+                Observer {
+                    it?.let { document ->
+                        documentHeader = document.header
+                        fragment_add_document_customer_id_input.setText(document.header.customerId.toString())
+                        fragment_add_document_customer_name_input.setText(document.header.customerName)
+                        adapter?.updateData(document.positions as ArrayList)
+                    }
                 }
-            }
         )
         fragment_add_document_save.setOnClickListener {
             val customerId = fragment_add_document_customer_id_input.text.toString().toLongOrNull()
-                ?: 0L
+                    ?: 0L
             val customerName = fragment_add_document_customer_name_input.text.toString()
             saveDocument(
-                DocumentHeaderDto(
-                    documentHeader.documentHeaderId,
-                    documentHeader.creationDate,
-                    customerId,
-                    customerName
-                ),
-                ArrayList() // TODO pass adapters data
+                    DocumentHeaderDto(
+                            documentHeader.documentHeaderId,
+                            documentHeader.creationDate,
+                            customerId,
+                            customerName
+                    ),
+                    adapter?.data ?: ArrayList()
             )
         }
     }
@@ -73,15 +85,15 @@ class EditDocumentFragment : BaseFragment() {
             imm.hideSoftInputFromWindow(it.window?.currentFocus?.applicationWindowToken, 0)
         }
         viewModel.saveDocument(Document(documentHeader, positions)).observe(
-            viewLifecycleOwner,
-            Observer {
-                if (it) {
-                    Toast.makeText(context, resources.getString(R.string.document_saved), Toast.LENGTH_LONG).show()
-                    navigate.popBackStack()
-                } else {
-                    Toast.makeText(context, resources.getString(R.string.document_save_error), Toast.LENGTH_LONG).show()
+                viewLifecycleOwner,
+                Observer {
+                    if (it) {
+                        Toast.makeText(context, resources.getString(R.string.document_saved), Toast.LENGTH_LONG).show()
+                        navigate.popBackStack()
+                    } else {
+                        Toast.makeText(context, resources.getString(R.string.document_save_error), Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
         )
     }
 

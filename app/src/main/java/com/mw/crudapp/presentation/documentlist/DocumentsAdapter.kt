@@ -53,15 +53,15 @@ class DocumentsAdapter(private var data: List<DocumentHeaderDto>, private val ac
                 item_document_id.text = document.documentHeaderId.toString()
                 item_document_date.text = TextFormatter.formatTimeMsToDate(document.creationDate)
                 item_document_customer.text = resources.getString(
-                    R.string.customer_id_and_name,
-                    document.customerId.toString(),
-                    document.customerName
+                        R.string.customer_id_and_name,
+                        document.customerId.toString(),
+                        document.customerName
                 )
                 item_document_positions.text = document.positionsCount.toString()
                 item_document_value.text = TextFormatter.formatNetGrossValue(
-                    context,
-                    document.netValue,
-                    document.grossValue
+                        context,
+                        document.netValue,
+                        document.grossValue
                 )
             }
         }

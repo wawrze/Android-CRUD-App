@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class DocumentHeader(
 
         @PrimaryKey(autoGenerate = true)
-    var documentHeaderId: Long = 0L,
+        var documentHeaderId: Long = 0L,
 
         var creationDate: Long = System.currentTimeMillis(),
 

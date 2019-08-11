@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Injector.injector
-            .databaseModule(DatabaseModule(this))
-            .navigationModule(NavigationModule(this))
+                .databaseModule(DatabaseModule(this))
+                .navigationModule(NavigationModule(this))
         setContentView(R.layout.activity_main)
     }
 
