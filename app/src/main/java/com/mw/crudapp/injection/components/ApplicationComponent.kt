@@ -7,6 +7,7 @@ import com.mw.crudapp.presentation.MainActivity
 import com.mw.crudapp.presentation.adddocument.AddDocumentViewModel
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
 import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
+import com.mw.crudapp.presentation.editdocument.EditDocumentViewModel
 import dagger.Component
 
 @Component(
@@ -22,5 +23,6 @@ interface ApplicationComponent {
     fun inject(documentsViewModel: DocumentsViewModel)
     fun inject(documentPositionsViewModel: DocumentPositionsViewModel)
     fun inject(addDocumentViewModel: AddDocumentViewModel)
+    fun inject(editDocumentViewModel: EditDocumentViewModel)
 
 }
