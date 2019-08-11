@@ -2,13 +2,17 @@ package com.mw.crudapp.database.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
-@Entity(primaryKeys = ["documentHeaderId", "productName"])
+@Entity
 data class DocumentPosition(
+
+        @PrimaryKey(autoGenerate = true)
+        var documentPositionId: Long = 0L,
 
         var documentHeaderId: Long = 0L,
 
-        var productName: String = "",
+        var productId: Long = 0L,
 
         var amount: Double = 0.0,
 
@@ -18,17 +22,18 @@ data class DocumentPosition(
 
 ) {
     @Ignore
-    constructor(productName: String, amount: Double, netPrice: Double, grossPrice: Double) : this() {
-        this.productName = productName
+    constructor(
+            documentHeaderId: Long,
+            productId: Long,
+            amount: Double,
+            netPrice: Double,
+            grossPrice: Double
+    ) : this() {
+        this.documentHeaderId = documentHeaderId
+        this.productId = productId
         this.amount = amount
         this.netPrice = netPrice
         this.grossPrice = grossPrice
     }
 
-/*    val netValue: Double
-        get() = amount * netPrice
-
-    val grossValue: Double
-        get() = amount * grossPrice
-    */
 }

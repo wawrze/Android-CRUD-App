@@ -29,8 +29,7 @@ abstract class DocumentDao {
             DocumentHeader(
                     document.header.documentHeaderId,
                     document.header.creationDate,
-                    document.header.customerId,
-                    document.header.customerName
+                    document.header.customerId
             )
         } else {
             DocumentHeader(document.header.customerId, document.header.customerName)
@@ -44,7 +43,7 @@ abstract class DocumentDao {
                 document.positions.map {
                     DocumentPosition(
                             documentHeaderId,
-                            it.productName,
+                            it.productId,
                             it.amount,
                             it.netPrice,
                             it.grossPrice
@@ -58,29 +57,42 @@ abstract class DocumentDao {
             """
         SELECT
             dh.*,
+            c.customerName AS customerName,
             SUM(dp.amount * dp.netPrice) AS netValue,
             SUM(dp.amount * dp.grossPrice) AS grossValue,
-            COUNT(dp.productName) AS positionsCount
+            COUNT(dp.productId) AS positionsCount
         FROM DocumentHeader dh
             JOIN DocumentPosition dp ON dp.documentHeaderId = dh.documentHeaderId
+            JOIN Customer c ON c.customerId = dh.customerId
         WHERE dh.documentHeaderId = :documentId
         GROUP BY dh.documentHeaderId
     """
     )
     abstract fun getDocumentHeaderById(documentId: Long): DocumentHeaderDto
 
-    @Query("SELECT * FROM DocumentPosition WHERE documentHeaderId = :documentId")
+    @Query(
+            """
+            SELECT
+                dp.*,
+                p.productName
+            FROM DocumentPosition dp
+                JOIN Product p ON p.productId = dp.productId 
+            WHERE documentHeaderId = :documentId
+    """
+    )
     abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPositionDto>
 
     @Query(
             """
         SELECT
             dh.*,
+            c.customerName AS customerName,
             SUM(dp.amount * dp.netPrice) AS netValue,
             SUM(dp.amount * dp.grossPrice) AS grossValue,
-            COUNT(dp.productName) AS positionsCount
+            COUNT(dp.productId) AS positionsCount
         FROM DocumentHeader dh
             JOIN DocumentPosition dp ON dp.documentHeaderId = dh.documentHeaderId
+            JOIN Customer c ON c.customerId = dh.customerId
         GROUP BY dh.documentHeaderId
     """
     )

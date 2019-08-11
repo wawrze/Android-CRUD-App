@@ -12,14 +12,11 @@ data class DocumentHeader(
 
         var creationDate: Long = System.currentTimeMillis(),
 
-        var customerId: Long = 0L,
-
-        var customerName: String = ""
+        var customerId: Long = 0L
 
 ) {
     @Ignore
     constructor(customerId: Long, customerName: String) : this() {
         this.customerId = customerId
-        this.customerName = customerName
     }
 }
