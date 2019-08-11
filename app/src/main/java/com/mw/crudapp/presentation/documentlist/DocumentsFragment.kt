@@ -52,7 +52,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     }
 
     override fun addDocument() {
-
+        navigate.navigate(DocumentsFragmentDirections.toAddDocument())
     }
 
     override fun deleteDocument(documentId: Long) {
