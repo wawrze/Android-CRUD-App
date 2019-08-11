@@ -30,6 +30,7 @@ abstract class DocumentDao {
         if (documentHeaderId <= 0L) {
             return false
         }
+        deleteDocumentPositions(documentHeaderId)
         val positionsIds = insertPositions(
                 document.positions.map {
                     DocumentPosition(
