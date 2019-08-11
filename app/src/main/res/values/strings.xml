@@ -48,4 +48,8 @@
     <string name="add_product">Dodaj produkt</string>
     <string name="edit_product">Edytuj product</string>
     <string name="delete_product">Usuń produkt</string>
+    <string name="product_delete_error">Usunięcie produktu nie powiodło się</string>
+    <string name="customer_delete_error">Usunięcie klienta nie powiodło się</string>
+    <string name="product_save_error">Zapisanie produktu nie powiodło się</string>
+    <string name="customer_save_error">Zapisanie klienta nie powiodło się</string>
 </resources>

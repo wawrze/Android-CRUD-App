@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,8 +59,11 @@ class ProductsFragment : BaseFragment(), ProductsActions {
         viewModel.saveProduct(product).observe(
                 viewLifecycleOwner,
                 Observer {
-                    // TODO some toast
-                    viewModel.fetchProducts()
+                    if (it) {
+                        viewModel.fetchProducts()
+                    } else {
+                        Toast.makeText(context, R.string.product_save_error, Toast.LENGTH_LONG).show()
+                    }
                 }
         )
     }
@@ -68,8 +72,11 @@ class ProductsFragment : BaseFragment(), ProductsActions {
         viewModel.deleteCustomer(productId).observe(
                 viewLifecycleOwner,
                 Observer {
-                    // TODO some toast
-                    viewModel.fetchProducts()
+                    if (it) {
+                        viewModel.fetchProducts()
+                    } else {
+                        Toast.makeText(context, R.string.product_delete_error, Toast.LENGTH_LONG).show()
+                    }
                 }
         )
     }
