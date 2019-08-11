@@ -35,9 +35,7 @@ class DocumentsAdapter(private var data: List<DocumentHeader>, private val actio
         }
     }
 
-    override fun getItemCount(): Int {
-        return data.size + 1
-    }
+    override fun getItemCount(): Int = data.size + 1
 
     fun updateData(data: List<DocumentHeader>) {
         this.data = data
