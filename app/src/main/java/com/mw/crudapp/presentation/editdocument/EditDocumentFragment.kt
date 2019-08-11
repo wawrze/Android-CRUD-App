@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseFragment
+import com.mw.crudapp.database.entities.Customer
 import com.mw.crudapp.database.models.Document
 import com.mw.crudapp.database.models.DocumentHeaderDto
 import com.mw.crudapp.database.models.DocumentPositionDto
@@ -24,6 +26,7 @@ class EditDocumentFragment : BaseFragment() {
     private lateinit var viewModel: EditDocumentViewModel
     private var adapter: EditDocumentPositionsAdapter? = null
     private val args by navArgs<EditDocumentFragmentArgs>()
+    private var customers = ArrayList<Customer>()
     private lateinit var documentHeader: DocumentHeaderDto
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,6 +36,7 @@ class EditDocumentFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpSpinner()
         recyclerSetup()
         setupView()
     }
@@ -51,22 +55,41 @@ class EditDocumentFragment : BaseFragment() {
         fragment_add_document_recycler.adapter = adapter
     }
 
+    private fun setUpSpinner() {
+        viewModel.fetchCustomers().observe(
+                viewLifecycleOwner,
+                Observer {
+                    customers = it as ArrayList
+                    context?.let { context ->
+                        val spinnerAdapter = ArrayAdapter(
+                                context,
+                                android.R.layout.simple_spinner_item,
+                                customers.map { customer -> customer.customerName })
+                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        fragment_add_document_customer_spinner.adapter = spinnerAdapter
+                    }
+                }
+        )
+    }
+
     private fun setupView() {
         viewModel.fetchDocumentData(args.documentId).observe(
                 viewLifecycleOwner,
                 Observer {
                     it?.let { document ->
                         documentHeader = document.header
-                        fragment_add_document_customer_id_input.setText(document.header.customerId.toString())
-                        fragment_add_document_customer_name_input.setText(document.header.customerName)
+                        fragment_add_document_customer_spinner.setSelection(
+                                customers.indexOf(
+                                        Customer(document.header.customerId, document.header.customerName)
+                                )
+                        )
                         adapter?.updateData(document.positions as ArrayList)
                     }
                 }
         )
         fragment_add_document_save.setOnClickListener {
-            val customerId = fragment_add_document_customer_id_input.text.toString().toLongOrNull()
-                    ?: 0L
-            val customerName = fragment_add_document_customer_name_input.text.toString()
+            val customerName = customers[fragment_add_document_customer_spinner.selectedItemPosition].customerName
+            val customerId = customers[fragment_add_document_customer_spinner.selectedItemPosition].customerId
             saveDocument(
                     DocumentHeaderDto(
                             documentHeader.documentHeaderId,

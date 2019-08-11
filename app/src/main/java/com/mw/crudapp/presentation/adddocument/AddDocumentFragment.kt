@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseFragment
+import com.mw.crudapp.database.entities.Customer
 import com.mw.crudapp.database.models.Document
 import com.mw.crudapp.database.models.DocumentHeaderDto
 import com.mw.crudapp.database.models.DocumentPositionDto
@@ -22,6 +24,7 @@ class AddDocumentFragment : BaseFragment() {
 
     private lateinit var viewModel: AddDocumentViewModel
     private var adapter: AddDocumentPositionsAdapter? = null
+    private var customers = ArrayList<Customer>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(AddDocumentViewModel::class.java)
@@ -31,10 +34,10 @@ class AddDocumentFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerSetup()
+        setUpSpinner()
         fragment_add_document_save.setOnClickListener {
-            val customerId = fragment_add_document_customer_id_input.text.toString().toLongOrNull()
-                    ?: 0L
-            val customerName = fragment_add_document_customer_name_input.text.toString()
+            val customerName = customers[fragment_add_document_customer_spinner.selectedItemPosition].customerName
+            val customerId = customers[fragment_add_document_customer_spinner.selectedItemPosition].customerId
             saveDocument(
                     DocumentHeaderDto(customerId, customerName),
                     adapter?.data ?: ArrayList()
@@ -46,6 +49,23 @@ class AddDocumentFragment : BaseFragment() {
         super.onResume()
         toolbarTitleRes = R.string.new_document
         navigationBack = true
+    }
+
+    private fun setUpSpinner() {
+        viewModel.fetchCustomers().observe(
+                viewLifecycleOwner,
+                Observer {
+                    customers = it as ArrayList
+                    context?.let { context ->
+                        val spinnerAdapter = ArrayAdapter(
+                                context,
+                                android.R.layout.simple_spinner_item,
+                                customers.map { customer -> customer.customerName })
+                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        fragment_add_document_customer_spinner.adapter = spinnerAdapter
+                    }
+                }
+        )
     }
 
     private fun recyclerSetup() {
