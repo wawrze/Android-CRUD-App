@@ -2,7 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation.xml"
-    app:startDestination="@id/documents_fragment">
+    app:startDestination="@id/fragment_main">
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="com.mw.crudapp.presentation.MainPageFragment"
+        android:label="MainFragment">
+
+        <action
+            android:id="@+id/to_documents"
+            app:destination="@id/documents_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/to_customers"
+            app:destination="@id/fragment_customers"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/documents_fragment"
@@ -42,5 +65,10 @@
         android:id="@+id/fragment_add_document"
         android:name="com.mw.crudapp.presentation.adddocument.AddDocumentFragment"
         android:label="NewDocumentFragment" />
+
+    <fragment
+        android:id="@+id/fragment_customers"
+        android:name="com.mw.crudapp.presentation.customers.CustomersFragment"
+        android:label="CustomersFragment" />
 
 </navigation>

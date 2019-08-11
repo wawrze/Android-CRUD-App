@@ -17,7 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="dialog_header_text">
+    <style name="header_text">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/background_dark</item>
         <item name="android:textStyle">bold</item>

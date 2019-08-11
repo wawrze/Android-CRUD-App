@@ -100,7 +100,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
                     item_new_customer_input.text.clear()
                     adapter.showAddNewCustomerItem(false)
                 }
-                item_customer_remove.setOnClickListener {
+                item_new_customer_save.setOnClickListener {
                     val customerName = item_new_customer_input.text.toString()
                     item_new_customer_input.text.clear()
                     adapter.addNewCustomer(Customer(customerName))
@@ -121,7 +121,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
                     item_new_customer_input.text.clear()
                     adapter.editItem(-1)
                 }
-                item_customer_remove.setOnClickListener {
+                item_new_customer_save.setOnClickListener {
                     val customerName = item_new_customer_input.text.toString()
                     item_new_customer_input.text.clear()
                     adapter.saveEditedCustomer(Customer(customer.customerId, customerName))
@@ -136,7 +136,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
         fun bind(adapter: CustomersAdapter) {
             itemView.apply {
                 item_add_text.text = resources.getString(R.string.add_customer)
-                item_add_icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_add)) // TODO change icon
+                item_add_icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_add_customer))
                 setOnClickListener {
                     adapter.showAddNewCustomerItem(true)
                 }

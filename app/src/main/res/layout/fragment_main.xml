@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/large_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_main_documents_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:padding="@dimen/regular_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/fragment_main_documents_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/documents"
+            android:src="@drawable/ic_documents"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_main_documents"
+            style="@style/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:padding="@dimen/small_margin"
+            android:text="@string/documents"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_documents_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_main_customers_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:background="@color/grey"
+        android:padding="@dimen/regular_margin"
+        app:layout_constraintTop_toBottomOf="@id/fragment_main_documents_section">
+
+        <ImageView
+            android:id="@+id/fragment_main_customers_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/customers"
+            android:src="@drawable/ic_customers"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_main_customers"
+            style="@style/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:padding="@dimen/small_margin"
+            android:text="@string/customers"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_customers_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_main_products_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:background="@color/grey"
+        android:padding="@dimen/regular_margin"
+        app:layout_constraintTop_toBottomOf="@id/fragment_main_customers_section">
+
+        <ImageView
+            android:id="@+id/fragment_main_products_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/products"
+            android:src="@drawable/ic_products"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_main_products"
+            style="@style/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:padding="@dimen/small_margin"
+            android:text="@string/products"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_products_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

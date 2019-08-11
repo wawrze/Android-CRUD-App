@@ -33,7 +33,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     override fun onResume() {
         super.onResume()
         toolbarTitleRes = R.string.document_list
-        navigationBack = false
+        navigationBack = true
     }
 
     private fun recyclerSetup() {

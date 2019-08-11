@@ -42,4 +42,7 @@
     <string name="edit_customer">Edytuj klienta</string>
     <string name="delete_customer">Usuń klienta</string>
     <string name="save">Zapisz</string>
+    <string name="documents">Dokumenty</string>
+    <string name="customers">Klienci</string>
+    <string name="products">Produkty</string>
 </resources>
