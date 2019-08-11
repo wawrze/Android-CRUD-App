@@ -5,50 +5,49 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseAdapter
-import com.mw.crudapp.database.entities.DocumentHeader
+import com.mw.crudapp.database.models.DocumentHeaderDto
 import com.mw.crudapp.utils.TextFormatter
 import kotlinx.android.synthetic.main.item_add.view.*
 import kotlinx.android.synthetic.main.item_document.view.*
 
-class DocumentsAdapter(private var data: List<DocumentHeader>, private val actions: DocumentActions) : BaseAdapter() {
+class DocumentsAdapter(private var data: List<DocumentHeaderDto>, private val actions: DocumentActions) :
+        BaseAdapter() {
 
     companion object {
-        private const val FOOTER_TYPE = 0
+        private const val ADD_TYPE = 0
         private const val DOCUMENT_TYPE = 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when (viewType) {
-        FOOTER_TYPE -> FooterVH(inflate(parent, R.layout.item_add))
+        ADD_TYPE -> AddDocumentVH(inflate(parent, R.layout.item_add))
         else -> DocumentVH(inflate(parent, R.layout.item_document))
     }
 
-    override fun getItemViewType(position: Int): Int = if (position == data.size) {
-        FOOTER_TYPE
+    override fun getItemViewType(position: Int): Int = if (position == 0) {
+        ADD_TYPE
     } else {
         DOCUMENT_TYPE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
-            is DocumentVH -> holder.bindDocument(data[position], actions)
-            is FooterVH -> holder.bindFooter(actions)
+            is DocumentVH -> holder.bindDocument(data[position - 1], actions)
+            is AddDocumentVH -> holder.bind(actions)
         }
     }
 
-    override fun getItemCount(): Int {
-        return data.size + 1
-    }
+    override fun getItemCount(): Int = data.size + 1
 
-    fun updateData(data: List<DocumentHeader>) {
+    fun updateData(data: List<DocumentHeaderDto>) {
         this.data = data
         notifyDataSetChanged()
     }
 
     class DocumentVH(v: View) : ViewHolder(v) {
 
-        fun bindDocument(document: DocumentHeader, actions: DocumentActions) {
+        fun bindDocument(document: DocumentHeaderDto, actions: DocumentActions) {
             itemView.apply {
-                item_document_details.setOnClickListener { actions.showDocument(document.documentHeaderId) }
+                item_document_details.setOnClickListener { actions.showDocumentPositions(document.documentHeaderId) }
                 item_document_edit.setOnClickListener { actions.editDocument(document.documentHeaderId) }
                 item_document_remove.setOnClickListener { actions.deleteDocument(document.documentHeaderId) }
                 item_document_id.text = document.documentHeaderId.toString()
@@ -69,9 +68,9 @@ class DocumentsAdapter(private var data: List<DocumentHeader>, private val actio
 
     }
 
-    class FooterVH(v: View) : ViewHolder(v) {
+    class AddDocumentVH(v: View) : ViewHolder(v) {
 
-        fun bindFooter(actions: DocumentActions) {
+        fun bind(actions: DocumentActions) {
             itemView.apply {
                 item_add_text.text = resources.getString(R.string.add_document)
                 setOnClickListener {

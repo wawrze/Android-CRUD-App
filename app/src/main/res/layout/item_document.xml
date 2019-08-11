@@ -36,7 +36,7 @@
     <ImageView
             android:id="@+id/item_document_remove"
             android:src="@drawable/ic_delete"
-            android:contentDescription="@string/edit_document"
+            android:contentDescription="@string/remove_document"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/item_document_edit"
@@ -123,7 +123,7 @@
             app:layout_constraintTop_toBottomOf="@id/item_document_date"
             app:layout_constraintStart_toEndOf="@id/item_document_customer_label"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="(456) Nazwa klienta"/>
+            tools:text="(456) Some Client Name" />
 
     <TextView
             android:id="@+id/item_document_positions_label"

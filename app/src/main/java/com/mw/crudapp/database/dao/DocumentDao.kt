@@ -4,6 +4,8 @@ import androidx.room.*
 import com.mw.crudapp.database.entities.DocumentHeader
 import com.mw.crudapp.database.entities.DocumentPosition
 import com.mw.crudapp.database.models.Document
+import com.mw.crudapp.database.models.DocumentHeaderDto
+import com.mw.crudapp.database.models.DocumentPositionDto
 
 @Dao
 abstract class DocumentDao {
@@ -22,15 +24,23 @@ abstract class DocumentDao {
 
     @Query("")
     @Transaction
-    fun insertDocumentWithPositions(documentHeader: DocumentHeader, positions: List<DocumentPosition>): Boolean {
+    fun insertDocumentWithPositions(document: Document): Boolean {
+        val documentHeader = DocumentHeader(document.header.customerId, document.header.customerName)
         val documentHeaderId = insertHeaders(documentHeader)
         if (documentHeaderId <= 0L) {
             return false
         }
-        positions.forEach {
-            it.documentHeaderId = documentHeaderId
-        }
-        val positionsIds = insertPositions(positions)
+        val positionsIds = insertPositions(
+                document.positions.map {
+                    DocumentPosition(
+                            documentHeaderId,
+                            it.productName,
+                            it.amount,
+                            it.netPrice,
+                            it.grossPrice
+                    )
+                }
+        )
         return positionsIds.isNotEmpty()
     }
 
@@ -47,16 +57,33 @@ abstract class DocumentDao {
         GROUP BY dh.documentHeaderId
     """
     )
-    abstract fun getDocumentHeaderById(documentId: Long): DocumentHeader
+    abstract fun getDocumentHeaderById(documentId: Long): DocumentHeaderDto
 
     @Query("SELECT * FROM DocumentPosition WHERE documentHeaderId = :documentId")
-    abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPosition>
+    abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPositionDto>
 
-    @Query("SELECT * FROM DocumentHeader")
-    abstract fun getAllDocumentHeaders(): List<DocumentHeader>
+    @Query(
+            """
+        SELECT
+            dh.*,
+            SUM(dp.amount * dp.netPrice) AS netValue,
+            SUM(dp.amount * dp.grossPrice) AS grossValue,
+            COUNT(dp.productName) AS positionsCount
+        FROM DocumentHeader dh
+            JOIN DocumentPosition dp ON dp.documentHeaderId = dh.documentHeaderId
+        GROUP BY dh.documentHeaderId
+    """
+    )
+    abstract fun getAllDocumentHeaders(): List<DocumentHeaderDto>
 
     fun getDocumentWithPositions(documentId: Long): Document {
         return Document(getDocumentHeaderById(documentId), getDocumentPositionsByHeaderId(documentId))
     }
+
+    @Query("DELETE FROM DocumentHeader WHERE documentHeaderId = :documentId")
+    abstract fun deleteDocumentHeader(documentId: Long): Int
+
+    @Query("DELETE FROM DocumentPosition WHERE documentHeaderId = :documentId")
+    abstract fun deleteDocumentPositions(documentId: Long): Int
 
 }

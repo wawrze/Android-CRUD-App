@@ -7,23 +7,14 @@ import androidx.room.PrimaryKey
 @Entity
 data class DocumentHeader(
 
-    @PrimaryKey(autoGenerate = true)
+        @PrimaryKey(autoGenerate = true)
     var documentHeaderId: Long = 0L,
 
-    var creationDate: Long = System.currentTimeMillis(),
+        var creationDate: Long = System.currentTimeMillis(),
 
-    var customerId: Long = 0L,
+        var customerId: Long = 0L,
 
-    var customerName: String = "",
-
-    @Ignore
-    var netValue: Double = 0.0,
-
-    @Ignore
-    var grossValue: Double = 0.0,
-
-    @Ignore
-    var positionsCount: Int = 0
+        var customerName: String = ""
 
 ) {
     @Ignore

@@ -8,6 +8,6 @@ interface DocumentActions {
 
     fun editDocument(documentId: Long)
 
-    fun showDocument(documentId: Long)
+    fun showDocumentPositions(documentId: Long)
 
 }

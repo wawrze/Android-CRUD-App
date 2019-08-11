@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg">
+
+    <TextView
+        android:id="@+id/dialog_document_positions_header"
+        style="@style/dialog_header_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_document_positions_close"
+        app:layout_constraintEnd_toStartOf="@id/dialog_document_positions_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Document 12" />
+
+    <ImageView
+        android:id="@+id/dialog_document_positions_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/close_dialog"
+        android:padding="@dimen/small_margin"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dialog_document_positions_guideline_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dialog_document_positions_guideline_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dialog_document_positions_guideline_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <TextView
+        android:id="@+id/dialog_document_positions_product_name_label"
+        style="@style/list_item_label_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:gravity="bottom"
+        android:lines="2"
+        android:padding="2dp"
+        android:text="@string/product_name"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/dialog_document_positions_guideline_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_document_positions_header" />
+
+    <TextView
+        android:id="@+id/dialog_document_positions_amount_label"
+        style="@style/list_item_label_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:gravity="bottom"
+        android:lines="2"
+        android:padding="2dp"
+        android:text="@string/amount"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/dialog_document_positions_guideline_2"
+        app:layout_constraintStart_toStartOf="@id/dialog_document_positions_guideline_1"
+        app:layout_constraintTop_toBottomOf="@id/dialog_document_positions_header" />
+
+    <TextView
+        android:id="@+id/dialog_document_positions_price_label"
+        style="@style/list_item_label_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:lines="2"
+        android:padding="2dp"
+        android:text="@string/net_gross_price"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/dialog_document_positions_guideline_3"
+        app:layout_constraintStart_toStartOf="@id/dialog_document_positions_guideline_2"
+        app:layout_constraintTop_toBottomOf="@id/dialog_document_positions_header" />
+
+    <TextView
+        android:id="@+id/dialog_document_positions_value_label"
+        style="@style/list_item_label_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:gravity="bottom"
+        android:lines="2"
+        android:padding="2dp"
+        android:text="@string/net_gross_value"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/dialog_document_positions_guideline_3"
+        app:layout_constraintTop_toBottomOf="@id/dialog_document_positions_header" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dialog_document_positions_recycler"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_document_positions_product_name_label"
+        tools:listitem="@layout/dialog_document_positions" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_add_document"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/regular_margin">
+
+    <ImageView
+        android:id="@+id/fragment_add_document_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:layout_marginEnd="@dimen/regular_margin"
+        android:contentDescription="@string/add_document"
+        android:src="@drawable/ic_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_document_customer_label"
+        style="@style/list_item_label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:padding="2dp"
+        android:text="@string/customer"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_document_save"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_add_document_customer_id_label"
+        style="@style/list_item_value_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:padding="2dp"
+        android:text="@string/customer_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_document_customer_label" />
+
+    <EditText
+        android:id="@+id/fragment_add_document_customer_id_input"
+        style="@style/list_item_value_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/customer_id"
+        android:inputType="number"
+        android:lines="1"
+        android:textColorHint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_document_customer_id_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fragment_add_document_customer_id_label"
+        app:layout_constraintTop_toTopOf="@id/fragment_add_document_customer_id_label"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/fragment_add_document_customer_name_label"
+        style="@style/list_item_value_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:padding="2dp"
+        android:text="@string/customer_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_document_customer_id_label" />
+
+    <EditText
+        android:id="@+id/fragment_add_document_customer_name_input"
+        style="@style/list_item_value_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/customer_name"
+        android:inputType="text"
+        android:lines="1"
+        android:textColorHint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_document_customer_name_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fragment_add_document_customer_name_label"
+        app:layout_constraintTop_toTopOf="@id/fragment_add_document_customer_name_label"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/fragment_add_document_positions_label"
+        style="@style/list_item_label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:padding="2dp"
+        android:text="@string/document_positions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_document_customer_name_label" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_add_document_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_document_positions_label"
+        tools:listitem="@layout/item_document_position" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
