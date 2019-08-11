@@ -60,7 +60,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     }
 
     override fun editDocument(documentId: Long) {
-
+        navigate.navigate(DocumentsFragmentDirections.toEditDocumentFragment(documentId))
     }
 
     override fun showDocument(documentId: Long) {

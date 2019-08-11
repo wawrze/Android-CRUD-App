@@ -8,6 +8,27 @@
     <fragment
             android:id="@+id/documents_fragment"
             android:name="com.mw.crudapp.presentation.documentlist.DocumentsFragment"
-            android:label="DocumentsFragment"/>
+            android:label="DocumentsFragment">
+
+        <action
+                android:id="@+id/to_edit_document_fragment"
+                app:destination="@id/edit_document_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/edit_document_fragment"
+            android:name="com.mw.crudapp.presentation.editdocument.EditDocumentFragment"
+            android:label="EditDocumentFragment">
+
+        <argument
+                android:name="document_id"
+                app:argType="long"/>
+
+    </fragment>
 
 </navigation>
