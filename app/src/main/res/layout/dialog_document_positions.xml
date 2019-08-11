@@ -83,7 +83,6 @@
     <TextView
             android:id="@+id/dialog_document_positions_price_label"
             style="@style/list_item_label_text"
-
             android:text="@string/net_gross_price"
             android:lines="2"
             android:textAlignment="center"

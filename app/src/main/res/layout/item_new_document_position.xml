@@ -113,12 +113,24 @@
             tools:ignore="Autofill"/>
 
     <ImageView
+            android:id="@+id/item_new_document_position_cancel"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
+            app:layout_constraintTop_toTopOf="@id/item_new_document_position_add"
+            app:layout_constraintBottom_toBottomOf="@id/item_new_document_position_add"
+            app:layout_constraintEnd_toStartOf="@id/item_new_document_position_add"/>
+
+    <ImageView
             android:id="@+id/item_new_document_position_add"
             android:src="@drawable/ic_save"
             android:contentDescription="@string/add_document"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/large_margin"
             android:layout_marginEnd="@dimen/regular_margin"
             app:layout_constraintTop_toBottomOf="@id/item_new_document_position_net_price_label"
             app:layout_constraintEnd_toEndOf="parent"/>

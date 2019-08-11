@@ -32,7 +32,7 @@ class DocumentsAdapter(private var data: List<DocumentHeaderDto>, private val ac
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
             is DocumentVH -> holder.bindDocument(data[position - 1], actions)
-            is AddDocumentVH -> holder.bindFooter(actions)
+            is AddDocumentVH -> holder.bind(actions)
         }
     }
 
@@ -70,7 +70,7 @@ class DocumentsAdapter(private var data: List<DocumentHeaderDto>, private val ac
 
     class AddDocumentVH(v: View) : ViewHolder(v) {
 
-        fun bindFooter(actions: DocumentActions) {
+        fun bind(actions: DocumentActions) {
             itemView.apply {
                 item_add_text.text = resources.getString(R.string.add_document)
                 setOnClickListener {

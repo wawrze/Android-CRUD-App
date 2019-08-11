@@ -36,7 +36,7 @@
     <ImageView
             android:id="@+id/item_document_remove"
             android:src="@drawable/ic_delete"
-            android:contentDescription="@string/edit_document"
+            android:contentDescription="@string/remove_document"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/item_document_edit"

@@ -16,10 +16,19 @@
     <string name="close_dialog">Zamknij dialog</string>
     <string name="document_with_id">Dokument %d</string>
     <string name="product_name">Nazwa produktu</string>
+    <string name="product_name_">Nazwa produktu:</string>
     <string name="amount">Ilość</string>
+    <string name="amount_">Ilość:</string>
     <string name="document_deleted">Usunięto dokument i jego pozycje</string>
     <string name="document_delet_error">Usunięcie dokumentu nie powiodło się</string>
     <string name="customer_id">Id klienta:</string>
     <string name="customer_name">Nazwa klienta:</string>
     <string name="document_positions">Pozycje dokumentu:</string>
+    <string name="add_position">Dodaj pozycję dokumentu</string>
+    <string name="net_price">Cena netto:</string>
+    <string name="gross_price">Cena brutto:</string>
+    <string name="price">Cena</string>
+    <string name="remove_position">Usuń pozycję</string>
+    <string name="edit_position">Edytuj pozycję</string>
+    <string name="cancel">Anuluj</string>
 </resources>

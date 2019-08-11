@@ -4,7 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/item_document_position_guideline_1"
@@ -90,5 +91,30 @@
             app:layout_constraintStart_toStartOf="@id/item_document_position_guideline_3"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="10.00 zł / 12.30 zł"/>
+
+    <ImageView
+            android:id="@+id/item_document_position_edit"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/edit_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/regular_margin"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/item_document_position_remove"
+            app:layout_constraintBottom_toBottomOf="@id/item_document_position_remove"
+            app:layout_constraintEnd_toStartOf="@id/item_document_position_remove"
+            tools:visibility="visible"/>
+
+    <ImageView
+            android:id="@+id/item_document_position_remove"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/remove_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/regular_margin"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/item_document_position_product_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
