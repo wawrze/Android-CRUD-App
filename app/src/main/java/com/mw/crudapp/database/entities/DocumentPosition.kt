@@ -24,4 +24,11 @@ data class DocumentPosition(
         this.netPrice = netPrice
         this.grossPrice = grossPrice
     }
+
+/*    val netValue: Double
+        get() = amount * netPrice
+
+    val grossValue: Double
+        get() = amount * grossPrice
+    */
 }

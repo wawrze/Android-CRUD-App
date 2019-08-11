@@ -5,6 +5,7 @@ import com.mw.crudapp.injection.modules.DatabaseModule
 import com.mw.crudapp.injection.modules.NavigationModule
 import com.mw.crudapp.presentation.MainActivity
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
+import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
 import dagger.Component
 
 @Component(
@@ -18,5 +19,6 @@ interface ApplicationComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(baseFragment: BaseFragment)
     fun inject(documentsViewModel: DocumentsViewModel)
+    fun inject(documentPositionsViewModel: DocumentPositionsViewModel)
 
 }
