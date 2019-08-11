@@ -12,4 +12,6 @@
     <string name="add_document">Dodaj nowy dokument</string>
     <string name="net_gross_with_currency">%s zł / %s zł</string>
     <string name="customer_id_and_name">(%s) %s</string>
+    <string name="close_dialog">Zamknij dialog</string>
+    <string name="document_with_id">Dokument %d</string>
 </resources>
