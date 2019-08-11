@@ -9,7 +9,7 @@ import com.mw.crudapp.database.entities.Customer
 @Dao
 interface CustomersDao {
 
-    @Query("SELECT * FROM Customer")
+    @Query("SELECT * FROM Customer ORDER BY customerId DESC")
     fun getAllCustomers(): List<Customer>
 
     @Query("DELETE FROM Customer WHERE customerId = :customerId")

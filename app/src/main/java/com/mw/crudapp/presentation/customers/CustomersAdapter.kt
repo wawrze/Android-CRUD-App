@@ -20,7 +20,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
         private const val CUSTOMER_TYPE = 3
     }
 
-    val data = ArrayList<Customer>()
+    var data = ArrayList<Customer>()
     private var addNewCustomer = false
     private var editedPosition: Int = -1
 
@@ -73,6 +73,11 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     fun removeCustomer(customerId: Long) {
         actions.deleteCustomer(customerId)
+        notifyDataSetChanged()
+    }
+
+    fun updateData(data: ArrayList<Customer>) {
+        this.data = data
         notifyDataSetChanged()
     }
 

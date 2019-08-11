@@ -1,9 +1,11 @@
 package com.mw.crudapp.presentation.customers
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +31,7 @@ class CustomersFragment : BaseFragment(), CustomersActions {
         viewModel.fetchCustomers().observe(
                 viewLifecycleOwner,
                 Observer {
-                    // TODO pass data to adapter
+                    adapter?.updateData(it as ArrayList)
                 }
         )
     }
@@ -49,6 +51,10 @@ class CustomersFragment : BaseFragment(), CustomersActions {
     }
 
     override fun saveCustomer(customer: Customer) {
+        activity?.let {
+            val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.window?.currentFocus?.applicationWindowToken, 0)
+        }
         viewModel.saveCustomer(customer).observe(
                 viewLifecycleOwner,
                 Observer {
