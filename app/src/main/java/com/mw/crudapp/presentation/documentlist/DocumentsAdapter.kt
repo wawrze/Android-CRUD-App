@@ -13,25 +13,25 @@ import kotlinx.android.synthetic.main.item_document.view.*
 class DocumentsAdapter(private var data: List<DocumentHeader>, private val actions: DocumentActions) : BaseAdapter() {
 
     companion object {
-        private const val FOOTER_TYPE = 0
+        private const val ADD_TYPE = 0
         private const val DOCUMENT_TYPE = 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when (viewType) {
-        FOOTER_TYPE -> FooterVH(inflate(parent, R.layout.item_add))
+        ADD_TYPE -> AddDocumentVH(inflate(parent, R.layout.item_add))
         else -> DocumentVH(inflate(parent, R.layout.item_document))
     }
 
-    override fun getItemViewType(position: Int): Int = if (position == data.size) {
-        FOOTER_TYPE
+    override fun getItemViewType(position: Int): Int = if (position == 0) {
+        ADD_TYPE
     } else {
         DOCUMENT_TYPE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
-            is DocumentVH -> holder.bindDocument(data[position], actions)
-            is FooterVH -> holder.bindFooter(actions)
+            is DocumentVH -> holder.bindDocument(data[position - 1], actions)
+            is AddDocumentVH -> holder.bindFooter(actions)
         }
     }
 
@@ -69,7 +69,7 @@ class DocumentsAdapter(private var data: List<DocumentHeader>, private val actio
 
     }
 
-    class FooterVH(v: View) : ViewHolder(v) {
+    class AddDocumentVH(v: View) : ViewHolder(v) {
 
         fun bindFooter(actions: DocumentActions) {
             itemView.apply {
