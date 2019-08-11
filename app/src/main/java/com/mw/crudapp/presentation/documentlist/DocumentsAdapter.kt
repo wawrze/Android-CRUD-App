@@ -48,7 +48,7 @@ class DocumentsAdapter(private var data: List<DocumentHeader>, private val actio
 
         fun bindDocument(document: DocumentHeader, actions: DocumentActions) {
             itemView.apply {
-                item_document_details.setOnClickListener { actions.showDocument(document.documentHeaderId) }
+                item_document_details.setOnClickListener { actions.showDocumentPositions(document.documentHeaderId) }
                 item_document_edit.setOnClickListener { actions.editDocument(document.documentHeaderId) }
                 item_document_remove.setOnClickListener { actions.deleteDocument(document.documentHeaderId) }
                 item_document_id.text = document.documentHeaderId.toString()

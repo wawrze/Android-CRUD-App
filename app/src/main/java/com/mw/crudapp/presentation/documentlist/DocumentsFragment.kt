@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseFragment
+import com.mw.crudapp.presentation.documentpositions.DocumentPositionsDialog
 import kotlinx.android.synthetic.main.fragment_documents.*
 
 class DocumentsFragment : BaseFragment(), DocumentActions {
@@ -63,8 +64,8 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
 
     }
 
-    override fun showDocument(documentId: Long) {
-
+    override fun showDocumentPositions(documentId: Long) {
+        DocumentPositionsDialog.newInstance(documentId).show(fragmentManager)
     }
 
 }
