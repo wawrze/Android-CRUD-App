@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -24,6 +25,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerSetup()
+        observersSetup()
     }
 
     override fun onResume() {
@@ -38,6 +40,15 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
         }
         fragment_documents_recycler.layoutManager = LinearLayoutManager(context, VERTICAL, false)
         fragment_documents_recycler.adapter = adapter
+    }
+
+    private fun observersSetup() {
+        viewModel.getDocuments().observe(
+            viewLifecycleOwner,
+            Observer {
+                adapter?.updateData(it)
+            }
+        )
     }
 
     override fun addDocument() {
