@@ -16,4 +16,6 @@
     <string name="document_with_id">Dokument %d</string>
     <string name="product_name">Nazwa produktu</string>
     <string name="amount">Ilość</string>
+    <string name="document_deleted">Usunięto dokument i jego pozycje</string>
+    <string name="document_delet_error">Usunięcie dokumentu nie powiodło się</string>
 </resources>
