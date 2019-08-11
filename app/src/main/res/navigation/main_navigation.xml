@@ -25,6 +25,14 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+        <action
+            android:id="@+id/to_products"
+            app:destination="@id/fragment_products"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     </fragment>
 
     <fragment
@@ -70,5 +78,10 @@
         android:id="@+id/fragment_customers"
         android:name="com.mw.crudapp.presentation.customers.CustomersFragment"
         android:label="CustomersFragment" />
+
+    <fragment
+        android:id="@+id/fragment_products"
+        android:name="com.mw.crudapp.presentation.products.ProductsFragment"
+        android:label="ProductsFragment" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.mw.crudapp.presentation.customers
+package com.mw.crudapp.presentation.products
 
 import android.content.Context
 import android.os.Bundle
@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseFragment
-import com.mw.crudapp.database.entities.Customer
+import com.mw.crudapp.database.entities.Product
 import kotlinx.android.synthetic.main.fragment_customers.*
 
-class CustomersFragment : BaseFragment(), CustomersActions {
+class ProductsFragment : BaseFragment(), ProductsActions {
 
-    private lateinit var viewModel: CustomersViewModel
-    private var adapter: CustomersAdapter? = null
+    private lateinit var viewModel: ProductsViewModel
+    private var adapter: ProductsAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(CustomersViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ProductsViewModel::class.java)
         return inflater.inflate(R.layout.fragment_customers, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerSetup()
-        viewModel.fetchCustomers().observe(
+        viewModel.fetchProducts().observe(
                 viewLifecycleOwner,
                 Observer {
                     adapter?.updateData(it as ArrayList)
@@ -38,38 +38,38 @@ class CustomersFragment : BaseFragment(), CustomersActions {
 
     override fun onResume() {
         super.onResume()
-        toolbarTitleRes = R.string.customers
+        toolbarTitleRes = R.string.products
         navigationBack = true
     }
 
     private fun recyclerSetup() {
         if (adapter == null) {
-            adapter = CustomersAdapter(this)
+            adapter = ProductsAdapter(this)
         }
         fragment_customers_recycler.layoutManager = LinearLayoutManager(context, VERTICAL, false)
         fragment_customers_recycler.adapter = adapter
     }
 
-    override fun saveCustomer(customer: Customer) {
+    override fun saveProduct(product: Product) {
         activity?.let {
             val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(it.window?.currentFocus?.applicationWindowToken, 0)
         }
-        viewModel.saveCustomer(customer).observe(
+        viewModel.saveProduct(product).observe(
                 viewLifecycleOwner,
                 Observer {
                     // TODO some toast
-                    viewModel.fetchCustomers()
+                    viewModel.fetchProducts()
                 }
         )
     }
 
-    override fun deleteCustomer(customerId: Long) {
-        viewModel.deleteCustomer(customerId).observe(
+    override fun deleteProduct(productId: Long) {
+        viewModel.deleteCustomer(productId).observe(
                 viewLifecycleOwner,
                 Observer {
                     // TODO some toast
-                    viewModel.fetchCustomers()
+                    viewModel.fetchProducts()
                 }
         )
     }

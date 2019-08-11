@@ -7,15 +7,26 @@ import androidx.room.Query
 import com.mw.crudapp.database.entities.Customer
 
 @Dao
-interface CustomersDao {
+abstract class CustomersDao {
 
     @Query("SELECT * FROM Customer ORDER BY customerId DESC")
-    fun getAllCustomers(): List<Customer>
+    abstract fun getAllCustomers(): List<Customer>
+
+    fun deleteCustomer(customerId: Long): Int {
+        return if (isCustomerInUse(customerId)) {
+            0
+        } else {
+            proceedDeleteCustomer(customerId)
+        }
+    }
+
+    @Query("SELECT EXISTS(SELECT customerId FROM DocumentHeader WHERE customerId = :customerId)")
+    protected abstract fun isCustomerInUse(customerId: Long): Boolean
 
     @Query("DELETE FROM Customer WHERE customerId = :customerId")
-    fun deleteCustomer(customerId: Long): Int
+    protected abstract fun proceedDeleteCustomer(customerId: Long): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCustomer(customer: Customer): Long
+    abstract fun insertCustomer(customer: Customer): Long
 
 }

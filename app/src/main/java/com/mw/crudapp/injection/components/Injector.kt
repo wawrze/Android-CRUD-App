@@ -7,6 +7,7 @@ import com.mw.crudapp.presentation.customers.CustomersViewModel
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
 import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
 import com.mw.crudapp.presentation.editdocument.EditDocumentViewModel
+import com.mw.crudapp.presentation.products.ProductsViewModel
 
 object Injector {
 
@@ -22,6 +23,7 @@ object Injector {
             is AddDocumentViewModel -> injector.build().inject(o)
             is EditDocumentViewModel -> injector.build().inject(o)
             is CustomersViewModel -> injector.build().inject(o)
+            is ProductsViewModel -> injector.build().inject(o)
         }
     }
 

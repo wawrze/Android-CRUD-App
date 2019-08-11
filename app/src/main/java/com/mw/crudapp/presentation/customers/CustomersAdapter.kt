@@ -25,9 +25,9 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
     private var editedPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when (viewType) {
-        ADD_CUSTOMER_TYPE -> AddPositionVH(inflate(parent, R.layout.item_add))
-        NEW_CUSTOMER_TYPE -> NewPositionVH(inflate(parent, R.layout.item_new_customer))
-        EDIT_CUSTOMER_TYPE -> EditPositionVH(inflate(parent, R.layout.item_new_customer))
+        ADD_CUSTOMER_TYPE -> AddCustomerVH(inflate(parent, R.layout.item_add))
+        NEW_CUSTOMER_TYPE -> NewCustomerVH(inflate(parent, R.layout.item_new_customer))
+        EDIT_CUSTOMER_TYPE -> EditCustomerVH(inflate(parent, R.layout.item_new_customer))
         else -> CustomerVH(inflate(parent, R.layout.item_customer))
     }
 
@@ -42,10 +42,10 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
-            is AddPositionVH -> holder.bind(this)
-            is NewPositionVH -> holder.bindNewPosition(this)
-            is EditPositionVH -> holder.bindEditPosition(this, data[position - 1])
-            is CustomerVH -> holder.bindPosition(this, data[position - 1], position - 1)
+            is AddCustomerVH -> holder.bind(this)
+            is NewCustomerVH -> holder.bindNewCustomer(this)
+            is EditCustomerVH -> holder.bindEditCustomer(this, data[position - 1])
+            is CustomerVH -> holder.bindCustomer(this, data[position - 1], position - 1)
         }
     }
 
@@ -83,7 +83,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     class CustomerVH(v: View) : ViewHolder(v) {
 
-        fun bindPosition(adapter: CustomersAdapter, customer: Customer, position: Int) {
+        fun bindCustomer(adapter: CustomersAdapter, customer: Customer, position: Int) {
             itemView.apply {
                 item_customer_name.text = customer.customerName
                 item_customer_edit.setOnClickListener {
@@ -97,9 +97,9 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     }
 
-    class NewPositionVH(v: View) : ViewHolder(v) {
+    class NewCustomerVH(v: View) : ViewHolder(v) {
 
-        fun bindNewPosition(adapter: CustomersAdapter) {
+        fun bindNewCustomer(adapter: CustomersAdapter) {
             itemView.apply {
                 item_new_customer_cancel.setOnClickListener {
                     item_new_customer_input.text.clear()
@@ -114,9 +114,9 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
         }
     }
 
-    class EditPositionVH(v: View) : ViewHolder(v) {
+    class EditCustomerVH(v: View) : ViewHolder(v) {
 
-        fun bindEditPosition(
+        fun bindEditCustomer(
                 adapter: CustomersAdapter,
                 customer: Customer
         ) {
@@ -136,7 +136,7 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     }
 
-    class AddPositionVH(v: View) : ViewHolder(v) {
+    class AddCustomerVH(v: View) : ViewHolder(v) {
 
         fun bind(adapter: CustomersAdapter) {
             itemView.apply {

@@ -9,6 +9,7 @@ import com.mw.crudapp.presentation.customers.CustomersViewModel
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
 import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
 import com.mw.crudapp.presentation.editdocument.EditDocumentViewModel
+import com.mw.crudapp.presentation.products.ProductsViewModel
 import dagger.Component
 
 @Component(
@@ -26,5 +27,6 @@ interface ApplicationComponent {
     fun inject(addDocumentViewModel: AddDocumentViewModel)
     fun inject(editDocumentViewModel: EditDocumentViewModel)
     fun inject(customersViewModel: CustomersViewModel)
+    fun inject(productsViewModel: ProductsViewModel)
 
 }

@@ -45,4 +45,7 @@
     <string name="documents">Dokumenty</string>
     <string name="customers">Klienci</string>
     <string name="products">Produkty</string>
+    <string name="add_product">Dodaj produkt</string>
+    <string name="edit_product">Edytuj product</string>
+    <string name="delete_product">Usuń produkt</string>
 </resources>

@@ -22,9 +22,9 @@ class MainPageFragment : BaseFragment() {
         fragment_main_customers_section.setOnClickListener {
             navigate.navigate(MainPageFragmentDirections.toCustomers())
         }
-//        fragment_main_products_section.setOnClickListener {
-//            navigate.navigate(MainPageFragmentDirections.toProducts())
-//        }
+        fragment_main_products_section.setOnClickListener {
+            navigate.navigate(MainPageFragmentDirections.toProducts())
+        }
     }
 
     override fun onResume() {
