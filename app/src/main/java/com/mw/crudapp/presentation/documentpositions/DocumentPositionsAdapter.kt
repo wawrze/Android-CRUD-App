@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseAdapter
-import com.mw.crudapp.database.entities.DocumentPosition
+import com.mw.crudapp.database.models.DocumentPositionDto
 import com.mw.crudapp.utils.TextFormatter
 import kotlinx.android.synthetic.main.item_document_position.view.*
 
-class DocumentPositionsAdapter(private var data: List<DocumentPosition>) : BaseAdapter() {
+class DocumentPositionsAdapter(private var data: List<DocumentPositionDto>) : BaseAdapter() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = DocumentPositionVH(
         inflate(parent, R.layout.item_document_position)
@@ -23,14 +23,14 @@ class DocumentPositionsAdapter(private var data: List<DocumentPosition>) : BaseA
 
     override fun getItemCount() = data.size
 
-    fun updateData(data: List<DocumentPosition>) {
+    fun updateData(data: List<DocumentPositionDto>) {
         this.data = data
         notifyDataSetChanged()
     }
 
     class DocumentPositionVH(v: View) : ViewHolder(v) {
 
-        fun bindPosition(position: DocumentPosition) {
+        fun bindPosition(position: DocumentPositionDto) {
             itemView.apply {
                 item_document_position_product_name.text = position.productName
                 item_document_position_product_amount.text = position.amount.toString()
@@ -39,11 +39,10 @@ class DocumentPositionsAdapter(private var data: List<DocumentPosition>) : BaseA
                     position.netPrice,
                     position.grossPrice
                 )
-                // TODO change to value
                 item_document_position_product_value.text = TextFormatter.formatNetGrossValue(
                     context,
-                    position.netPrice,
-                    position.grossPrice
+                        position.netValue,
+                        position.grossValue
                 )
             }
         }

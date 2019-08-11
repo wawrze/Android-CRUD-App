@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.mw.crudapp.R
@@ -24,9 +26,11 @@ class DocumentPositionsDialog : BaseDialog() {
 
     }
 
+    private lateinit var viewModel: DocumentPositionsViewModel
     private var adapter: DocumentPositionsAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        viewModel = ViewModelProviders.of(this).get(DocumentPositionsViewModel::class.java)
         return inflater.inflate(R.layout.dialog_document_positions, container, false)
     }
 
@@ -49,7 +53,12 @@ class DocumentPositionsDialog : BaseDialog() {
     }
 
     private fun observersSetup() {
-        // TODO observe view model fetch data
+        viewModel.fetchPositions(arguments?.getLong(DOCUMENT_ID) ?: 0L).observe(
+                viewLifecycleOwner,
+                Observer {
+                    adapter?.updateData(it)
+                }
+        )
     }
 
 }

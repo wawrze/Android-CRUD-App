@@ -5,6 +5,7 @@ import com.mw.crudapp.database.entities.DocumentHeader
 import com.mw.crudapp.database.entities.DocumentPosition
 import com.mw.crudapp.database.models.Document
 import com.mw.crudapp.database.models.DocumentHeaderDto
+import com.mw.crudapp.database.models.DocumentPositionDto
 
 @Dao
 abstract class DocumentDao {
@@ -50,17 +51,8 @@ abstract class DocumentDao {
     )
     abstract fun getDocumentHeaderById(documentId: Long): DocumentHeaderDto
 
-    @Query(
-        """
-        SELECT
-            *,
-            amount * netPrice AS netValue,
-            amount * grossPrice AS grossValue
-        FROM DocumentPosition dp
-        WHERE documentHeaderId = :documentId
-        """
-    )
-    abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPosition>
+    @Query("SELECT * FROM DocumentPosition WHERE documentHeaderId = :documentId")
+    abstract fun getDocumentPositionsByHeaderId(documentId: Long): List<DocumentPositionDto>
 
     @Query(
         """
