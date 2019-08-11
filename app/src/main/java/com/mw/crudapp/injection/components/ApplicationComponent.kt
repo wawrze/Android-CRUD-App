@@ -5,6 +5,7 @@ import com.mw.crudapp.injection.modules.DatabaseModule
 import com.mw.crudapp.injection.modules.NavigationModule
 import com.mw.crudapp.presentation.MainActivity
 import com.mw.crudapp.presentation.adddocument.AddDocumentViewModel
+import com.mw.crudapp.presentation.customers.CustomersViewModel
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
 import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
 import com.mw.crudapp.presentation.editdocument.EditDocumentViewModel
@@ -24,5 +25,6 @@ interface ApplicationComponent {
     fun inject(documentPositionsViewModel: DocumentPositionsViewModel)
     fun inject(addDocumentViewModel: AddDocumentViewModel)
     fun inject(editDocumentViewModel: EditDocumentViewModel)
+    fun inject(customersViewModel: CustomersViewModel)
 
 }

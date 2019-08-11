@@ -126,6 +126,8 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
                     adapter.addNewPosition(
                             DocumentPositionDto(
                                     0,
+                                    0,
+                                    0, // TODO change
                                     productName,
                                     amount,
                                     netPrice,
@@ -177,6 +179,8 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
                             position,
                             DocumentPositionDto(
                                     0,
+                                    0,
+                                    0, // TODO change
                                     productName,
                                     amount,
                                     netPrice,

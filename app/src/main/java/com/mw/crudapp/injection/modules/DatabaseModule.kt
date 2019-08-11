@@ -3,6 +3,7 @@ package com.mw.crudapp.injection.modules
 import android.content.Context
 import androidx.room.Room
 import com.mw.crudapp.database.Database
+import com.mw.crudapp.database.dao.CustomersDao
 import com.mw.crudapp.database.dao.DocumentDao
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,8 @@ class DatabaseModule(private val context: Context) {
 
     @Provides
     fun provideDocumentDao(database: Database): DocumentDao = database.documentDao()
+
+    @Provides
+    fun provideCustomersDao(database: Database): CustomersDao = database.customersDao()
 
 }
