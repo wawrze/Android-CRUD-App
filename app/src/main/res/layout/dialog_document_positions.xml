@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="@dimen/small_margin"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@id/dialog_document_positions_close"
         app:layout_constraintEnd_toStartOf="@id/dialog_document_positions_close"
         app:layout_constraintStart_toStartOf="parent"

@@ -58,22 +58,23 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     }
 
     override fun deleteDocument(documentId: Long) {
-        // TODO confirmation dialog
-        viewModel.deleteDocument(documentId).observe(
-                viewLifecycleOwner,
-                Observer {
-                    viewModel.fetchDocuments()
-                    Toast.makeText(
-                            context, resources.getString(
-                            if (it) {
-                                R.string.document_deleted
-                            } else {
-                                R.string.document_delete_error
-                            }
-                    ), Toast.LENGTH_LONG
-                    ).show()
-                }
-        )
+        DeleteConfirmationDialog.newInstance(documentId) {
+            viewModel.deleteDocument(documentId).observe(
+                    viewLifecycleOwner,
+                    Observer {
+                        viewModel.fetchDocuments()
+                        Toast.makeText(
+                                context, resources.getString(
+                                if (it) {
+                                    R.string.document_deleted
+                                } else {
+                                    R.string.document_delete_error
+                                }
+                        ), Toast.LENGTH_LONG
+                        ).show()
+                    }
+            )
+        }.show(fragmentManager)
     }
 
     override fun editDocument(documentId: Long) {
