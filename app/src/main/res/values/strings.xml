@@ -23,7 +23,8 @@
     <string name="document_deleted">Usunięto dokument i jego pozycje</string>
     <string name="document_delete_error">Usunięcie dokumentu nie powiodło się</string>
     <string name="customer_id">Id klienta:</string>
-    <string name="customer_name">Nazwa klienta:</string>
+    <string name="customer_name">Nazwa klienta</string>
+    <string name="customer_name_">Nazwa klienta:</string>
     <string name="document_positions">Pozycje dokumentu:</string>
     <string name="add_position">Dodaj pozycję dokumentu</string>
     <string name="net_price">Cena netto:</string>
@@ -37,4 +38,8 @@
     <string name="delete">Usuń</string>
     <string name="delete_confirmation_message">Czy na pewno chcesz usunąć dokument %d?</string>
     <string name="document_deleting">Usuwanie dokumentu</string>
+    <string name="add_customer">Dodaj klienta</string>
+    <string name="edit_customer">Edytuj klienta</string>
+    <string name="delete_customer">Usuń klienta</string>
+    <string name="save">Zapisz</string>
 </resources>

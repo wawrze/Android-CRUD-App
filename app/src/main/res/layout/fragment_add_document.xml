@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/regular_margin"
         android:padding="2dp"
-        android:text="@string/customer_name"
+        android:text="@string/customer_name_"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_add_document_customer_id_label" />
 
@@ -70,7 +70,7 @@
         style="@style/list_item_value_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/customer_name"
+        android:hint="@string/customer_name_"
         android:inputType="text"
         android:lines="1"
         android:textColorHint="@color/grey"

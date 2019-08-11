@@ -2,10 +2,14 @@ package com.mw.crudapp.presentation.customers
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseAdapter
 import com.mw.crudapp.database.entities.Customer
+import kotlinx.android.synthetic.main.item_add.view.*
+import kotlinx.android.synthetic.main.item_customer.view.*
+import kotlinx.android.synthetic.main.item_new_customer.view.*
 
 class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
@@ -22,9 +26,9 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when (viewType) {
         ADD_CUSTOMER_TYPE -> AddPositionVH(inflate(parent, R.layout.item_add))
-        NEW_CUSTOMER_TYPE -> NewPositionVH(inflate(parent, R.layout.item_new_document_position))
-        EDIT_CUSTOMER_TYPE -> EditPositionVH(inflate(parent, R.layout.item_new_document_position))
-        else -> CustomerVH(inflate(parent, R.layout.item_document_position))
+        NEW_CUSTOMER_TYPE -> NewPositionVH(inflate(parent, R.layout.item_new_customer))
+        EDIT_CUSTOMER_TYPE -> EditPositionVH(inflate(parent, R.layout.item_new_customer))
+        else -> CustomerVH(inflate(parent, R.layout.item_customer))
     }
 
     override fun getItemViewType(position: Int): Int = when {
@@ -40,8 +44,8 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
         when (holder) {
             is AddPositionVH -> holder.bind(this)
             is NewPositionVH -> holder.bindNewPosition(this)
-            is EditPositionVH -> holder.bindEditPosition(this, data[position - 1], position - 1)
-            is CustomerVH -> holder.bindPosition(this, data[position - 1])
+            is EditPositionVH -> holder.bindEditPosition(this, data[position - 1])
+            is CustomerVH -> holder.bindPosition(this, data[position - 1], position - 1)
         }
     }
 
@@ -61,22 +65,28 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
         notifyDataSetChanged()
     }
 
-    fun editPosition(customer: Customer) {
+    fun saveEditedCustomer(customer: Customer) {
         actions.saveCustomer(customer)
         editedPosition = -1
         notifyDataSetChanged()
     }
 
-    fun removePosition(customerId: Long) {
+    fun removeCustomer(customerId: Long) {
         actions.deleteCustomer(customerId)
         notifyDataSetChanged()
     }
 
     class CustomerVH(v: View) : ViewHolder(v) {
 
-        fun bindPosition(adapter: CustomersAdapter, customer: Customer) {
+        fun bindPosition(adapter: CustomersAdapter, customer: Customer, position: Int) {
             itemView.apply {
-
+                item_customer_name.text = customer.customerName
+                item_customer_edit.setOnClickListener {
+                    adapter.editItem(position)
+                }
+                item_customer_remove.setOnClickListener {
+                    adapter.removeCustomer(customer.customerId)
+                }
             }
         }
 
@@ -86,22 +96,36 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
         fun bindNewPosition(adapter: CustomersAdapter) {
             itemView.apply {
-
+                item_new_customer_cancel.setOnClickListener {
+                    item_new_customer_input.text.clear()
+                    adapter.showAddNewCustomerItem(false)
+                }
+                item_customer_remove.setOnClickListener {
+                    val customerName = item_new_customer_input.text.toString()
+                    item_new_customer_input.text.clear()
+                    adapter.addNewCustomer(Customer(customerName))
                 }
             }
         }
-
     }
 
     class EditPositionVH(v: View) : ViewHolder(v) {
 
         fun bindEditPosition(
                 adapter: CustomersAdapter,
-                customer: Customer,
-                position: Int
+                customer: Customer
         ) {
             itemView.apply {
-
+                item_new_customer_input.setText(customer.customerName)
+                item_new_customer_cancel.setOnClickListener {
+                    item_new_customer_input.text.clear()
+                    adapter.editItem(-1)
+                }
+                item_customer_remove.setOnClickListener {
+                    val customerName = item_new_customer_input.text.toString()
+                    item_new_customer_input.text.clear()
+                    adapter.saveEditedCustomer(Customer(customer.customerId, customerName))
+                }
             }
         }
 
@@ -111,7 +135,8 @@ class CustomersAdapter(private val actions: CustomersActions) : BaseAdapter() {
 
         fun bind(adapter: CustomersAdapter) {
             itemView.apply {
-//                item_add_text.text = resources.getString(R.string.add_position)
+                item_add_text.text = resources.getString(R.string.add_customer)
+                item_add_icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_add)) // TODO change icon
                 setOnClickListener {
                     adapter.showAddNewCustomerItem(true)
                 }
