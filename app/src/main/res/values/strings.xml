@@ -9,7 +9,7 @@
     <string name="net_gross_price">Cena netto / brutto:</string>
     <string name="edit_document">Edytuj dokument</string>
     <string name="remove_document">Usuń dokument</string>
-    <string name="add_document">Dodaj nowy dokument</string>
+    <string name="add_document">Utwórz nowy dokument</string>
     <string name="net_gross_with_currency">%s zł / %s zł</string>
     <string name="customer_id_and_name">(%s) %s</string>
     <string name="new_document">Nowy dokument</string>
@@ -19,4 +19,7 @@
     <string name="amount">Ilość</string>
     <string name="document_deleted">Usunięto dokument i jego pozycje</string>
     <string name="document_delet_error">Usunięcie dokumentu nie powiodło się</string>
+    <string name="customer_id">Id klienta:</string>
+    <string name="customer_name">Nazwa klienta:</string>
+    <string name="document_positions">Pozycje dokumentu:</string>
 </resources>

@@ -10,7 +10,7 @@
     <ImageView
             android:id="@+id/item_add_icon"
             android:src="@drawable/ic_add"
-            android:contentDescription="@string/edit_document"
+            android:contentDescription="@string/add_document"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/regular_margin"
