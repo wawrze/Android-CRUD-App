@@ -3,7 +3,7 @@ package com.mw.crudapp.presentation.documentlist
 import androidx.lifecycle.MutableLiveData
 import com.mw.crudapp.base.BaseViewModel
 import com.mw.crudapp.database.dao.DocumentDao
-import com.mw.crudapp.database.entities.DocumentHeader
+import com.mw.crudapp.database.models.DocumentHeaderDto
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,9 +14,9 @@ class DocumentsViewModel : BaseViewModel() {
     @Inject
     lateinit var documentDao: DocumentDao
 
-    private val documents: MutableLiveData<List<DocumentHeader>> = MutableLiveData()
+    private val documents: MutableLiveData<List<DocumentHeaderDto>> = MutableLiveData()
 
-    fun fetchDocuments(): MutableLiveData<List<DocumentHeader>> {
+    fun fetchDocuments(): MutableLiveData<List<DocumentHeaderDto>> {
         Observable.fromCallable { documentDao.getAllDocumentHeaders() }
             .onErrorReturn { ArrayList() }
             .subscribeOn(Schedulers.io())

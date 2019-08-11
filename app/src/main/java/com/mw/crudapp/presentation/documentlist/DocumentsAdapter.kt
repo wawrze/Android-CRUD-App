@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseAdapter
-import com.mw.crudapp.database.entities.DocumentHeader
+import com.mw.crudapp.database.models.DocumentHeaderDto
 import com.mw.crudapp.utils.TextFormatter
 import kotlinx.android.synthetic.main.item_add.view.*
 import kotlinx.android.synthetic.main.item_document.view.*
 
-class DocumentsAdapter(private var data: List<DocumentHeader>, private val actions: DocumentActions) : BaseAdapter() {
+class DocumentsAdapter(private var data: List<DocumentHeaderDto>, private val actions: DocumentActions) :
+    BaseAdapter() {
 
     companion object {
         private const val FOOTER_TYPE = 0
@@ -39,14 +40,14 @@ class DocumentsAdapter(private var data: List<DocumentHeader>, private val actio
         return data.size + 1
     }
 
-    fun updateData(data: List<DocumentHeader>) {
+    fun updateData(data: List<DocumentHeaderDto>) {
         this.data = data
         notifyDataSetChanged()
     }
 
     class DocumentVH(v: View) : ViewHolder(v) {
 
-        fun bindDocument(document: DocumentHeader, actions: DocumentActions) {
+        fun bindDocument(document: DocumentHeaderDto, actions: DocumentActions) {
             itemView.apply {
                 item_document_details.setOnClickListener { actions.showDocument(document.documentHeaderId) }
                 item_document_edit.setOnClickListener { actions.editDocument(document.documentHeaderId) }
