@@ -33,4 +33,7 @@
     <string name="cancel">Anuluj</string>
     <string name="document_saved">Dokument został zapisany</string>
     <string name="document_save_error">Nie udało się zapisać dokumentu</string>
+    <string name="delete">Usuń</string>
+    <string name="delete_confirmation_message">Czy na pewno chcesz usunąć dokument %d?</string>
+    <string name="document_deleting">Usuwanie dokumentu</string>
 </resources>

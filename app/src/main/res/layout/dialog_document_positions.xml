@@ -9,6 +9,7 @@
 
     <TextView
             android:id="@+id/dialog_document_positions_header"
+            android:textAllCaps="true"
             style="@style/dialog_header_text"
             android:layout_width="0dp"
             android:layout_height="0dp"

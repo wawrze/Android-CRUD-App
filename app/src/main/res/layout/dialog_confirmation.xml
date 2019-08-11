@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg">
+
+    <TextView
+            android:id="@+id/dialog_confirmation_header"
+            android:text="@string/document_deleting"
+            style="@style/dialog_header_text"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/small_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/dialog_confirmation_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dialog_confirmation_close"/>
+
+    <ImageView
+            android:id="@+id/dialog_confirmation_close"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/close_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/dialog_confirmation_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@id/dialog_confirmation_header"
+            tools:text="Are you sure you want to remove document 6?"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_confirmation_confirm"
+            android:text="@string/delete"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@id/dialog_confirmation_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dialog_confirmation_cancel"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_confirmation_cancel"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@id/dialog_confirmation_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dialog_confirmation_confirm"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
