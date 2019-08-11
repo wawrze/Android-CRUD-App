@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +44,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     }
 
     private fun observersSetup() {
-        viewModel.getDocuments().observe(
+        viewModel.fetchDocuments().observe(
             viewLifecycleOwner,
             Observer {
                 adapter?.updateData(it)
@@ -52,19 +53,34 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
     }
 
     override fun addDocument() {
-
+        // TODO navigate to new document fragment
     }
 
     override fun deleteDocument(documentId: Long) {
-
+        // TODO confirmation dialog
+        viewModel.deleteDocument(documentId).observe(
+            viewLifecycleOwner,
+            Observer {
+                viewModel.fetchDocuments()
+                Toast.makeText(
+                    context, resources.getString(
+                        if (it) {
+                            R.string.document_deleted
+                        } else {
+                            R.string.document_delet_error
+                        }
+                    ), Toast.LENGTH_LONG
+                ).show()
+            }
+        )
     }
 
     override fun editDocument(documentId: Long) {
-
+        // TODO navigate to edit document fragment
     }
 
     override fun showDocument(documentId: Long) {
-
+        // TODO show document positions dialog
     }
 
 }

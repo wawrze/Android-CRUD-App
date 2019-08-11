@@ -16,8 +16,9 @@ class DocumentsViewModel : BaseViewModel() {
 
     private val documents: MutableLiveData<List<DocumentHeader>> = MutableLiveData()
 
-    fun getDocuments(): MutableLiveData<List<DocumentHeader>> {
+    fun fetchDocuments(): MutableLiveData<List<DocumentHeader>> {
         Observable.fromCallable { documentDao.getAllDocumentHeaders() }
+            .onErrorReturn { ArrayList() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -25,6 +26,24 @@ class DocumentsViewModel : BaseViewModel() {
             }
             .addToDisposables()
         return documents
+    }
+
+    fun deleteDocument(documentId: Long): MutableLiveData<Boolean> {
+        val result = MutableLiveData<Boolean>()
+        Observable.fromCallable { documentDao.deleteDocumentHeader(documentId) }
+            .onErrorReturn { 0 }
+            .flatMap { deleted ->
+                Observable.fromCallable { documentDao.deleteDocumentPositions(documentId) }
+                    .onErrorReturn { 0 }
+                    .map { deleted > 0 }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                result.postValue(it)
+            }
+            .addToDisposables()
+        return result
     }
 
 }

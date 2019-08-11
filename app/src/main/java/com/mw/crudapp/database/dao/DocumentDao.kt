@@ -59,4 +59,10 @@ abstract class DocumentDao {
         return Document(getDocumentHeaderById(documentId), getDocumentPositionsByHeaderId(documentId))
     }
 
+    @Query("DELETE FROM DocumentHeader WHERE documentHeaderId = :documentId")
+    abstract fun deleteDocumentHeader(documentId: Long): Int
+
+    @Query("DELETE FROM DocumentPosition WHERE documentHeaderId = :documentId")
+    abstract fun deleteDocumentPositions(documentId: Long): Int
+
 }
