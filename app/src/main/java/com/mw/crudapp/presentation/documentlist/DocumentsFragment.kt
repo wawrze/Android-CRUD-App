@@ -68,7 +68,7 @@ class DocumentsFragment : BaseFragment(), DocumentActions {
                         if (it) {
                             R.string.document_deleted
                         } else {
-                            R.string.document_delet_error
+                            R.string.document_delete_error
                         }
                     ), Toast.LENGTH_LONG
                 ).show()

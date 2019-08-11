@@ -21,9 +21,7 @@ class DocumentsViewModel : BaseViewModel() {
             .onErrorReturn { ArrayList() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                documents.postValue(it)
-            }
+            .subscribe { documents.postValue(it) }
             .addToDisposables()
         return documents
     }
@@ -39,9 +37,7 @@ class DocumentsViewModel : BaseViewModel() {
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                result.postValue(it)
-            }
+            .subscribe { result.postValue(it) }
             .addToDisposables()
         return result
     }

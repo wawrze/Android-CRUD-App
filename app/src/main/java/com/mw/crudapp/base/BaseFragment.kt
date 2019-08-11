@@ -27,7 +27,7 @@ open class BaseFragment : Fragment() {
             toolbarTitle = getString(field)
         }
 
-    protected var toolbarTitle: String = ""
+    private var toolbarTitle: String = ""
         set(value) {
             field = value
             actionBar.title = value

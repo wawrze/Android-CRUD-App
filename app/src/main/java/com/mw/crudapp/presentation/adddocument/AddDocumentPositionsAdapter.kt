@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_add.view.*
 import kotlinx.android.synthetic.main.item_document_position.view.*
 import kotlinx.android.synthetic.main.item_new_document_position.view.*
 
-class AddDocumentPositionsAdapter(/*TODO: actions*/) : BaseAdapter() {
+class AddDocumentPositionsAdapter : BaseAdapter() {
 
     companion object {
         private const val ADD_POSITION_TYPE = 0
@@ -20,7 +20,7 @@ class AddDocumentPositionsAdapter(/*TODO: actions*/) : BaseAdapter() {
         private const val POSITION_TYPE = 3
     }
 
-    private var data = ArrayList<DocumentPositionDto>()
+    val data = ArrayList<DocumentPositionDto>()
     private var addNewPosition = false
     private var editedPosition: Int = -1
 

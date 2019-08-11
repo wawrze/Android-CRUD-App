@@ -2,6 +2,7 @@ package com.mw.crudapp.injection.components
 
 import com.mw.crudapp.base.BaseFragment
 import com.mw.crudapp.presentation.MainActivity
+import com.mw.crudapp.presentation.adddocument.AddDocumentViewModel
 import com.mw.crudapp.presentation.documentlist.DocumentsViewModel
 import com.mw.crudapp.presentation.documentpositions.DocumentPositionsViewModel
 
@@ -16,6 +17,7 @@ object Injector {
             is BaseFragment -> injector.build().inject(o)
             is DocumentsViewModel -> injector.build().inject(o)
             is DocumentPositionsViewModel -> injector.build().inject(o)
+            is AddDocumentViewModel -> injector.build().inject(o)
         }
     }
 

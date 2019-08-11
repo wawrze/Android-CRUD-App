@@ -24,15 +24,23 @@ abstract class DocumentDao {
 
     @Query("")
     @Transaction
-    fun insertDocumentWithPositions(documentHeader: DocumentHeader, positions: List<DocumentPosition>): Boolean {
+    fun insertDocumentWithPositions(document: Document): Boolean {
+        val documentHeader = DocumentHeader(document.header.customerId, document.header.customerName)
         val documentHeaderId = insertHeaders(documentHeader)
         if (documentHeaderId <= 0L) {
             return false
         }
-        positions.forEach {
-            it.documentHeaderId = documentHeaderId
-        }
-        val positionsIds = insertPositions(positions)
+        val positionsIds = insertPositions(
+            document.positions.map {
+                DocumentPosition(
+                    documentHeaderId,
+                    it.productName,
+                    it.amount,
+                    it.netPrice,
+                    it.grossPrice
+                )
+            }
+        )
         return positionsIds.isNotEmpty()
     }
 

@@ -20,7 +20,7 @@
     <string name="amount">Ilość</string>
     <string name="amount_">Ilość:</string>
     <string name="document_deleted">Usunięto dokument i jego pozycje</string>
-    <string name="document_delet_error">Usunięcie dokumentu nie powiodło się</string>
+    <string name="document_delete_error">Usunięcie dokumentu nie powiodło się</string>
     <string name="customer_id">Id klienta:</string>
     <string name="customer_name">Nazwa klienta:</string>
     <string name="document_positions">Pozycje dokumentu:</string>
@@ -31,4 +31,6 @@
     <string name="remove_position">Usuń pozycję</string>
     <string name="edit_position">Edytuj pozycję</string>
     <string name="cancel">Anuluj</string>
+    <string name="document_saved">Dokument został zapisany</string>
+    <string name="document_save_error">Nie udało się zapisać dokumentu</string>
 </resources>
