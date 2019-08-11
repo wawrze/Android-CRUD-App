@@ -74,6 +74,12 @@ class AddDocumentFragment : BaseFragment() {
         }
         fragment_add_document_recycler.layoutManager = LinearLayoutManager(context, VERTICAL, false)
         fragment_add_document_recycler.adapter = adapter
+        viewModel.fetchProducts().observe(
+            viewLifecycleOwner,
+            Observer {
+                adapter?.updateProducts(it as ArrayList)
+            }
+        )
     }
 
     private fun saveDocument(documentHeader: DocumentHeaderDto, positions: List<DocumentPositionDto>) {

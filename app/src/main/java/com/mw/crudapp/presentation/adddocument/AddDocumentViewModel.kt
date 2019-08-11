@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.mw.crudapp.base.BaseViewModel
 import com.mw.crudapp.database.dao.CustomersDao
 import com.mw.crudapp.database.dao.DocumentDao
+import com.mw.crudapp.database.dao.ProductsDao
 import com.mw.crudapp.database.entities.Customer
+import com.mw.crudapp.database.entities.Product
 import com.mw.crudapp.database.models.Document
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,11 +17,13 @@ class AddDocumentViewModel : BaseViewModel() {
 
     @Inject
     lateinit var documentDao: DocumentDao
-
     @Inject
     lateinit var customersDao: CustomersDao
+    @Inject
+    lateinit var productsDao: ProductsDao
 
     private val customers = MutableLiveData<List<Customer>>()
+    private val products = MutableLiveData<List<Product>>()
 
     fun saveNewDocument(document: Document): MutableLiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
@@ -40,6 +44,16 @@ class AddDocumentViewModel : BaseViewModel() {
                 .subscribe { customers.postValue(it) }
                 .addToDisposables()
         return customers
+    }
+
+    fun fetchProducts(): MutableLiveData<List<Product>> {
+        Observable.fromCallable { productsDao.getAllProducts() }
+            .onErrorReturn { ArrayList() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { products.postValue(it) }
+            .addToDisposables()
+        return products
     }
 
 }

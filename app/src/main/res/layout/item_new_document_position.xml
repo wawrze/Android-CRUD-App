@@ -7,41 +7,36 @@
     android:padding="@dimen/regular_margin">
 
     <TextView
-        android:id="@+id/item_new_document_position_product_name_label"
-        style="@style/list_item_value_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:text="@string/product_name_"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/item_new_document_position_product_label"
+            style="@style/list_item_value_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="@string/product"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <EditText
-        android:id="@+id/item_new_document_position_product_name_input"
-        style="@style/list_item_value_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/product_name"
-        android:inputType="text"
-        android:lines="1"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toBottomOf="@id/item_new_document_position_product_name_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/item_new_document_position_product_name_label"
-        app:layout_constraintTop_toTopOf="@id/item_new_document_position_product_name_label"
-        tools:ignore="Autofill" />
+    <Spinner
+            android:id="@+id/item_new_document_position_product_spinner"
+            style="@style/list_item_value_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/item_new_document_position_product_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_new_document_position_product_label"
+            app:layout_constraintTop_toTopOf="@id/item_new_document_position_product_label"/>
 
     <TextView
-        android:id="@+id/item_new_document_position_amount_label"
-        style="@style/list_item_value_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/regular_margin"
-        android:padding="2dp"
-        android:text="@string/amount_"
-        app:layout_constraintEnd_toStartOf="@id/item_new_document_position_amount_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_new_document_position_product_name_label" />
+            android:id="@+id/item_new_document_position_amount_label"
+            style="@style/list_item_value_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:padding="2dp"
+            android:text="@string/amount_"
+            app:layout_constraintEnd_toStartOf="@id/item_new_document_position_amount_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_new_document_position_product_label"/>
 
     <EditText
         android:id="@+id/item_new_document_position_amount_input"

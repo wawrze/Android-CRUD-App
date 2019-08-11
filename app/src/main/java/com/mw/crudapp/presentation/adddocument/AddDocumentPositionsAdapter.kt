@@ -2,9 +2,11 @@ package com.mw.crudapp.presentation.adddocument
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mw.crudapp.R
 import com.mw.crudapp.base.BaseAdapter
+import com.mw.crudapp.database.entities.Product
 import com.mw.crudapp.database.models.DocumentPositionDto
 import com.mw.crudapp.utils.TextFormatter
 import kotlinx.android.synthetic.main.item_add.view.*
@@ -23,6 +25,7 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
     val data = ArrayList<DocumentPositionDto>()
     private var addNewPosition = false
     private var editedPosition: Int = -1
+    private var products = ArrayList<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = when (viewType) {
         ADD_POSITION_TYPE -> AddPositionVH(inflate(parent, R.layout.item_add))
@@ -43,8 +46,8 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
             is AddPositionVH -> holder.bind(this)
-            is NewPositionVH -> holder.bindNewPosition(this)
-            is EditPositionVH -> holder.bindEditPosition(this, data[position - 1], position - 1)
+            is NewPositionVH -> holder.bindNewPosition(this, products)
+            is EditPositionVH -> holder.bindEditPosition(this, data[position - 1], products, position - 1)
             is PositionVH -> holder.bindPosition(this, data[position - 1], position - 1)
         }
     }
@@ -74,6 +77,10 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
     fun removePosition(position: Int) {
         data.removeAt(position)
         notifyDataSetChanged()
+    }
+
+    fun updateProducts(products: ArrayList<Product>) {
+        this.products = products
     }
 
     class PositionVH(v: View) : ViewHolder(v) {
@@ -107,32 +114,43 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
 
     class NewPositionVH(v: View) : ViewHolder(v) {
 
-        fun bindNewPosition(adapter: AddDocumentPositionsAdapter) {
+        fun bindNewPosition(adapter: AddDocumentPositionsAdapter, products: ArrayList<Product>) {
             itemView.apply {
+                context?.let { context ->
+                    val spinnerAdapter = ArrayAdapter(
+                        context,
+                        android.R.layout.simple_spinner_item,
+                        products.map { customer -> customer.productName })
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    item_new_document_position_product_spinner.adapter = spinnerAdapter
+                }
                 item_new_document_position_cancel.setOnClickListener {
                     clearInputs()
                     adapter.showAddNewPositionItem(false)
                 }
                 item_new_document_position_add.setOnClickListener {
-                    val productName = item_new_document_position_product_name_input.text.toString()
+                    val productId = products[item_new_document_position_product_spinner.selectedItemPosition].productId
+                    val productName =
+                        products[item_new_document_position_product_spinner.selectedItemPosition].productName
+
                     val amount = item_new_document_position_amount_input.text.toString().toDoubleOrNull()
-                            ?: 0.0
+                        ?: 0.0
                     val netPrice = item_new_document_position_net_price_input.text.toString().toDoubleOrNull()
-                            ?: 0.0
+                        ?: 0.0
                     val grossPrice =
-                            item_new_document_position_gross_price_input.text.toString().toDoubleOrNull()
-                                    ?: 0.0
+                        item_new_document_position_gross_price_input.text.toString().toDoubleOrNull()
+                            ?: 0.0
                     clearInputs()
                     adapter.addNewPosition(
-                            DocumentPositionDto(
-                                    0,
-                                    0,
-                                    0, // TODO change
-                                    productName,
-                                    amount,
-                                    netPrice,
-                                    grossPrice
-                            )
+                        DocumentPositionDto(
+                            0,
+                            0,
+                            productId,
+                            productName,
+                            amount,
+                            netPrice,
+                            grossPrice
+                        )
                     )
                 }
             }
@@ -140,7 +158,7 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
 
         private fun clearInputs() {
             itemView.apply {
-                item_new_document_position_product_name_input.text.clear()
+                item_new_document_position_product_spinner.setSelection(0)
                 item_new_document_position_amount_input.text.clear()
                 item_new_document_position_net_price_input.text.clear()
                 item_new_document_position_gross_price_input.text.clear()
@@ -152,12 +170,23 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
     class EditPositionVH(v: View) : ViewHolder(v) {
 
         fun bindEditPosition(
-                adapter: AddDocumentPositionsAdapter,
-                documentPosition: DocumentPositionDto,
-                position: Int
+            adapter: AddDocumentPositionsAdapter,
+            documentPosition: DocumentPositionDto,
+            products: ArrayList<Product>,
+            position: Int
         ) {
             itemView.apply {
-                item_new_document_position_product_name_input.setText(documentPosition.productName)
+                context?.let { context ->
+                    val spinnerAdapter = ArrayAdapter(
+                        context,
+                        android.R.layout.simple_spinner_item,
+                        products.map { customer -> customer.productName })
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    item_new_document_position_product_spinner.adapter = spinnerAdapter
+                }
+                item_new_document_position_product_spinner.setSelection(
+                    products.indexOf(Product(documentPosition.productId, documentPosition.productName))
+                )
                 item_new_document_position_amount_input.setText(documentPosition.amount.toString())
                 item_new_document_position_net_price_input.setText(documentPosition.netPrice.toString())
                 item_new_document_position_gross_price_input.setText(documentPosition.grossPrice.toString())
@@ -166,7 +195,9 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
                     adapter.editItem(-1)
                 }
                 item_new_document_position_add.setOnClickListener {
-                    val productName = item_new_document_position_product_name_input.text.toString()
+                    val productId = products[item_new_document_position_product_spinner.selectedItemPosition].productId
+                    val productName =
+                        products[item_new_document_position_product_spinner.selectedItemPosition].productName
                     val amount = item_new_document_position_amount_input.text.toString().toDoubleOrNull()
                             ?: 0.0
                     val netPrice = item_new_document_position_net_price_input.text.toString().toDoubleOrNull()
@@ -180,7 +211,7 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
                             DocumentPositionDto(
                                     0,
                                     0,
-                                    0, // TODO change
+                                productId,
                                     productName,
                                     amount,
                                     netPrice,
@@ -193,7 +224,7 @@ class AddDocumentPositionsAdapter : BaseAdapter() {
 
         private fun clearInputs() {
             itemView.apply {
-                item_new_document_position_product_name_input.text.clear()
+                item_new_document_position_product_spinner.setSelection(0)
                 item_new_document_position_amount_input.text.clear()
                 item_new_document_position_net_price_input.text.clear()
                 item_new_document_position_gross_price_input.text.clear()
