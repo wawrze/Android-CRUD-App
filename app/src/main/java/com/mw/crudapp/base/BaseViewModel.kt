@@ -5,7 +5,7 @@ import com.mw.crudapp.injection.components.Injector
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
